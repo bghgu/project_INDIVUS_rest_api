@@ -8,6 +8,7 @@ const async = require('async');
 const moment = require('moment');
 const now = moment(new Date()).format('YYYY-MM-DD, h:mm:ss a');
 
+//수정
 //전체 회원가입 정보 조회
 router.get('/', function(req, res) {
     const all_lists = [
