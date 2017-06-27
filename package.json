@@ -1,0 +1,23 @@
+{
+  "name": "indivus-rest-api-server",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "async": "^2.5.0",
+    "aws-sdk": "^2.77.0",
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "ejs": "~2.5.6",
+    "express": "~4.15.2",
+    "jsonwebtoken": "^7.4.1",
+    "morgan": "~1.8.1",
+    "multer-s3": "^2.7.0",
+    "mysql": "^2.13.0",
+    "promise-mysql": "^3.0.1",
+    "serve-favicon": "~2.4.2"
+  }
+}
