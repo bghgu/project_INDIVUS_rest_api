@@ -2,10 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../config/db_pool.js');
 const jwt = require('jsonwebtoken');
-const aws = require('aws-sdk');
 const async = require('async');
-aws.config.loadFromPath('./config/awsConfig.json');
-const mysql = require('mysql');
 
 router.post('/', async function(req, res) {
     console.log(req.body);
