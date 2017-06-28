@@ -1,25 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const async = require('async');
-const pool = require('../../config/db_pool.js');
-
+const jwt = require('../module/jwt.js');
+const db = require('../module/pool.js');
 
 router.get('/', async(req, res, next) => {
-    try{
-      var connection = await pool.getConnection();
-
-      var profile = 'select * from Profiles';
-
-      let result = await connection.query(profile);
-
-      res.status(201).send({result: result});
-
-    }catch (err) {
-        console.log(err);
-        next(err);
-    } finally {
-        pool.releaseConnection(connection);
-    }
+    const ID = jwt.verify(req.headers.authorization);
+    const profile = 'select * from Profiles where ID = ?';
+    let result = await db.execute(profile, ID);
+    res.status(200).send({result});
 });
 
 module.exports = router;

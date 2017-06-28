@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var config = require('./config/secretKey');
+//모든 라우트 처리
 var routes = require('./routes/routes');
 
 var app = express();
@@ -12,6 +13,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+//jwt 토큰 키
 app.set('jwt-secret', config.key);
 
 // uncomment after placing your favicon in /public

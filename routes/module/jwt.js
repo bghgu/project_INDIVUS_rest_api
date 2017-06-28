@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const secretKey = require('../config/secretKey').key;
+const secretKey = require('../../config/secretKey').key;
+//jwt 모듈화
 module.exports = {
     //jwt 발급후 토큰 리턴
     sign : function(ID) {

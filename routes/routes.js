@@ -1,19 +1,17 @@
 // 각종 라우팅을 연결하는 코드
 const express = require('express');
 const router = express.Router();
-//회원가입
-const signup = require('./signup');
-router.use('/signup', signup);
-//로그인
-const login = require('./login');
-router.use('/login', login);
+
+//유저 관련
+const user = require('./user/user_routes');
+router.use('/', user);
 
 //게시글 관련 라우팅 연결
-const post = require('./post/routes');
+const post = require('./post/post_routes');
 router.use('/post', post);
 
 //프로필
-const profile = require('./profile/routes');
+const profile = require('./profile/profile_routes');
 router.use('/profile', profile);
 
 module.exports = router;
