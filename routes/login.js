@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
+const jwt = require('./jwt.js');
 const async = require('async');
 const pool = require('../config/db_pool.js');
 
-router.post('/', async function(req, res) {
+router.post('/', async (req, res, next) => {
     try {
         const email = req.body.email;
         const password = req.body.password;
@@ -20,22 +20,14 @@ router.post('/', async function(req, res) {
             res.status(401).send({message: 'wrong password'});
         }
         else {
-            //jwt 발급하고 성공메세지 보내주기
-            const secretKey = req.app.get('jwt-secret');
-            const options = {
-                algorithm : "HS256",
-                expiresIn : 60 * 60 * 24 * 30//30 days
-            };
-            const payload = {
-                user_id : data[0].ID
-            };
-            const token = jwt.sign(payload, secretKey, options);
+            const token = jwt.sign(data[0].ID);
             res.status(200).send({message : 'login success', token : token});
         }
     }
     catch(err) {
         console.log(err);
-        res.status(500).send({message: err });
+        next(err);
+        //res.status(500).send({message: err });
     }
     finally {
         pool.releaseConnection(connection);
