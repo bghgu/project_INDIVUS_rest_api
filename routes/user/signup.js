@@ -8,14 +8,23 @@ router.post('/', async(req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
     const username = req.body.username;
+
     const checkEmail = 'select email from Signup where email = ?';
-    const insertIdToProfiles = 'insert into Profiles(ID) values(?)';
+    const checkUsername = 'select username from Signup where username = ?';
+
     const insertNewUser = 'insert into Signup set ?';
+    const insertIdToProfiles = 'insert into Profiles(ID) values(?)';
+
     let dupEmail = await db.execute(checkEmail, email);
+    let dupUsername = await db.execute(checkUsername, username);
+
     if (dupEmail.length !== 0) {
-        //중복되는 사용자이름을 사용할 수 없으므로 405로 응답합니다.
         res.status(405).send({message: 'email already exists'});
-    } else {
+    }
+    else if (dupUsername.length !== 0) {
+        res.status(405).send({message: 'username already exists'});
+    }
+    else {
         let newUser = {
             email: email,
             password: password,
@@ -23,7 +32,10 @@ router.post('/', async(req, res, next) => {
         };
         let inserted = await db.execute(insertNewUser, newUser);
         let profilesId = await db.execute(insertIdToProfiles, inserted.insertId);
-        res.status(201).send({result: inserted.insertId});
+        res.status(201).send({
+            message: "success",
+            id : inserted.insertId
+        });
     }
 });
 

@@ -33,7 +33,6 @@ router.post('/', upload.single('card_cover'), async(req, res, next) => {
     };
     let write = 'insert into Posts set ?';
     let result = await db.execute(write, data);
-    console.log(result);
     res.status(201).send({message: 'writing success'});
 });
 

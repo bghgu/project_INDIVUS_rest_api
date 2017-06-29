@@ -14,4 +14,8 @@ router.use('/post', post);
 const profile = require('./profile/profile_routes');
 router.use('/profile', profile);
 
+//팔로잉 & 팔로워
+const friends = require('./friends/friends_routes');
+router.use('/', friends);
+
 module.exports = router;
