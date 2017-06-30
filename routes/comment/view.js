@@ -4,12 +4,15 @@ const async = require('async');
 const jwt = require('../module/jwt.js');
 const db = require('../module/pool.js');
 
-router.get('/', async(req, res, next) => {
+router.get('/:post_id', async(req, res, next) => {
     const ID = jwt.verify(req.headers.authorization);
-    const profile = 'select * from Profiles where ID = ?';
-    let result = await db.execute(profile, ID);
+    const postId = req.params.post_id;
+
+    let viewComment = 'select * from Comments where post_id = ?';
+
+    let result = await db.execute(viewComment, postId);
     res.status(200).send({
-        result
+        message: "comment view success"
     });
 });
 

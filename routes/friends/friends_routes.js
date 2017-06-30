@@ -10,4 +10,8 @@ router.use('/following', following);
 const follower = require('./follower/follower_routes');
 router.use('/follower', follower);
 
+//팔로우 추가
+const follow = require('./follow');
+router.use('/follow', follow);
+
 module.exports = router;

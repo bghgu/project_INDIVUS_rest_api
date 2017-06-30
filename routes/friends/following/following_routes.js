@@ -4,8 +4,9 @@ const router = express.Router();
 //팔로잉 리스트
 const list = require('./list');
 router.use('/list', list);
-//팔로잉 추가
-const add = require('./add');
-router.use('/add', add);
+
+//팔로잉 삭제
+const del = require('./delete');
+router.use('/delete', del);
 
 module.exports = router;

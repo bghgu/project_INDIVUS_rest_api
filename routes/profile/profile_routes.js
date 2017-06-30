@@ -2,8 +2,8 @@
 const express = require('express');
 const router = express.Router();
 //프로필 조회
-const select = require('./select');
-router.use('/', select);
+const view = require('./view');
+router.use('/', view);
 //프로필 삭제
 const del = require('./delete');
 router.use('/delete', del);

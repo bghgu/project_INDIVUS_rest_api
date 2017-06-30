@@ -14,9 +14,18 @@ module.exports = {
         let token = jwt.sign(payload, secretKey, options);
         return token;
     },
-    //jwt 발급후 사용자 정보 리턴
+    //jwt 검증
+    //검증이 성공할 경우 사용자 정보 리턴(ID값)
+    //검증이 실패할 경우 -1 리턴
     verify : function(token) {
-        const decoded = jwt.verify(token, secretKey);
+        let decoded;
+        let error;
+        try {
+            decoded = jwt.verify(token, secretKey);
+        }
+        catch(err) {
+            error = err;
+        }
         if(!decoded) {
             return -1;
         }else {
