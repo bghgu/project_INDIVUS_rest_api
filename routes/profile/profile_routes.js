@@ -5,8 +5,8 @@ const router = express.Router();
 const view = require('./view');
 router.use('/', view);
 //프로필 삭제
-const del = require('./delete');
-router.use('/delete', del);
+const drop = require('./drop');
+router.use('/drop', drop);
 //프로필 수정
 const modify = require('./modify');
 router.use('/modify', modify);

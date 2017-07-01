@@ -18,7 +18,7 @@ router.post('/', async(req, res, next) => {
     for (i = 0; i < categories.length; i++) {
         let data = {
             ID: id,
-            category_id: categories[i],
+            category_id: categories[i]
         };
         result = await db.execute(select, data);
     }
@@ -26,7 +26,7 @@ router.post('/', async(req, res, next) => {
     if (result != undefined) {
         res.status(201).send({message: 'Signup success'});
     } else {
-        res.status(405).send({message: 'Signup fail'});
+        res.status(405).send({message: 'Signup failed'});
     }
 });
 

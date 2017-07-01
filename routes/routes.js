@@ -38,4 +38,12 @@ router.use('/comment', comment);
 const comment_detail = require('./comment_detail/comment_detail_routes');
 router.use('/comment_detail', comment_detail);
 
+//컬렉션
+const collection = require('./collection/collection_routes');
+router.use('/collection', collection);
+
+//컬렉션 상세
+const collection_detail = require('./collection_detail/collection_detail_routes');
+router.use('/collection_detail', collection_detail);
+
 module.exports = router;
