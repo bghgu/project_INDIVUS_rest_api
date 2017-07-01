@@ -3,6 +3,7 @@ const router = express.Router();
 const async = require('async');
 const jwt = require('../module/jwt.js');
 const db = require('../module/pool.js');
+const hash = require('../module/hash.js');
 
 router.post('/', async(req, res, next) => {
     const email = req.body.email;
@@ -11,11 +12,15 @@ router.post('/', async(req, res, next) => {
     let data = await db.execute(query, email);
     //아이디가 존재하지 않을 경우
     if (data.length == 0) {
-        res.status(401).send({message: 'wrong email'});
+        res.status(401).send({
+            message: 'wrong email'
+        });
     }
     //비밀번호가 틀릴 경우
-    else if (password != data[0].password) {
-        res.status(401).send({message: 'wrong password'});
+    else if (password != hash.decoding(data[0].password)) {
+        res.status(401).send({
+            message: 'wrong password'
+        });
     } else {
         const token = jwt.sign(data[0].ID);
         res.status(200).send({

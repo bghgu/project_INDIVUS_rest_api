@@ -2,7 +2,13 @@
 const express = require('express');
 const router = express.Router();
 //프로필 조회
-const select = require('./select');
-router.use('/', select);
+const view = require('./view');
+router.use('/', view);
+//프로필 삭제
+const drop = require('./drop');
+router.use('/drop', drop);
+//프로필 수정
+const modify = require('./modify');
+router.use('/modify', modify);
 
 module.exports = router;

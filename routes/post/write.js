@@ -22,19 +22,30 @@ const upload = multer({
 
 router.post('/', upload.single('card_cover'), async(req, res, next) => {
     const ID = jwt.verify(req.headers.authorization);
-    let data = {
-        ID: ID,
-        title: req.body.title,
-        sub_title: req.body.sub_title,
-        explain: req.body.explain,
-        content: req.body.content,
-        comment: req.body.comment,
-        card_cover: req.file ? req.file.location : null
-    };
+    const categories = req.body.categories;
     let write = 'insert into Posts set ?';
-    let result = await db.execute(write, data);
-    console.log(result);
-    res.status(201).send({message: 'writing success'});
+    let selectCatrgory = 'insert into Post_Categorys';
+    //토큰 검증이 성공할 경우
+    if (ID != -1) {
+        let data = {
+            ID_creator: ID,
+            title: req.body.title,
+            sub_title: req.body.sub_title,
+            explain: req.body.explain,
+            content: req.body.content,
+            comment: req.body.comment,
+            card_cover: req.file ? req.file.location : null,
+            category_id : req.body.category_id
+        };
+        let result = await db.execute(write, data);
+        res.status(200).send({
+            message: "write success"
+        });
+    //토큰 검증이 실패할 경우
+    } else {
+        res.status(401).send({
+            message: "access denied"
+        });
+    }
 });
-
 module.exports = router;
