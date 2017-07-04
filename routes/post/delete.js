@@ -4,7 +4,7 @@ const async = require('async');
 const jwt = require('../module/jwt.js');
 const db = require('../module/pool.js');
 
-router.delete('/', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
     const ID = jwt.verify(req.headers.authorization);
     let reqPostId = req.body.post_id;
 

@@ -55,5 +55,24 @@ module.exports = {
             pool.releaseConnection(connection);
             return result;
         }
+    },
+    //인수 4개
+    execute4 : async (...args) => {
+        const query = args[0];
+        const data = args[1];
+        const data2 = args[2];
+        const data3 = args[3];
+        let result;
+        try {
+            var connection = await pool.getConnection();
+            result = await connection.query(query, [data, data2, data3]) || null;
+        }
+        catch(err) {
+            next(err);
+        }
+        finally {
+            pool.releaseConnection(connection);
+            return result;
+        }
     }
 };

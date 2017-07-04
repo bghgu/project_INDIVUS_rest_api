@@ -4,9 +4,9 @@ const async = require('async');
 const jwt = require('../module/jwt.js');
 const db = require('../module/pool.js');
 
-router.delete('/:collection_id/:post_id', async (req, res, next) => {
-    const collectionId = req.params.collection_id;
-    const postId = req.params.post_id;
+router.post('/', async (req, res, next) => {
+    const collectionId = req.body.collection_id;
+    const postId = req.body.post_id;
 
     let readCollectionDetail = 'select * from Collections where collection_id = ? and post_id = ?';
     let collectionDetailExist = await db.execute3(readCollectionDetail, collectionId, postId);

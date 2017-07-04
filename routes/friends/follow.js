@@ -4,9 +4,9 @@ const async = require('async');
 const jwt = require('../module/jwt.js');
 const db = require('../module/pool.js');
 
-router.post('/:following_id', async(req, res, next) => {
+router.post('/', async(req, res, next) => {
     const ID = jwt.verify(req.headers.authorization);
-    const followingId = req.params.following_id;
+    const followingId = req.body.following_id;
 
     if(ID != -1){
       let bool = 'select ID, following_id from Following where ID = ? and following_id = ?';

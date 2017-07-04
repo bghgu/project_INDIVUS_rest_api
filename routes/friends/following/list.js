@@ -8,7 +8,7 @@ router.get('/', async(req, res, next) => {
     const ID = jwt.verify(req.headers.authorization);
 
     if(ID != -1){
-      const followingList = 'select * from Following where ID = ?';
+      const followingList = 'select distinct f.*, p.jobs, p.profile_photo, s.username from Following f join Profiles p on f.following_id=p.ID join Signup s on s.ID=p.ID where f.ID = ?';
       let result = await db.execute(followingList, ID);
       res.status(200).send({
           result

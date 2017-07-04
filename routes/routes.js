@@ -20,15 +20,15 @@ router.use('/', curation);
 
 //검색
 const search = require('./search/search_routes');
-router.use('/', search);
+router.use('/search', search);
 
 //팔로잉 & 팔로워
 const friends = require('./friends/friends_routes');
-router.use('/', friends);
+router.use('/friends', friends);
 
 //좋아요
 const like = require('./like/like_routes');
-router.use('/', like);
+router.use('/like', like);
 
 //댓글
 const comment = require('./comment/comment_routes');
@@ -45,5 +45,21 @@ router.use('/collection', collection);
 //컬렉션 상세
 const collection_detail = require('./collection_detail/collection_detail_routes');
 router.use('/collection_detail', collection_detail);
+
+//시리즈(워크룸)
+const series = require('./series/series_routes');
+router.use('/series', series);
+
+//시리즈 상세
+const series_detail = require('./series_detail/series_detail_routes');
+router.use('/series_detail', series_detail);
+
+//클로젯
+const closet = require('./closet/closet_routes');
+router.use('/closet', closet);
+
+//카테고리 & 키카드 목록 조회
+const list = require('./list/list_routes');
+router.use('/list', list);
 
 module.exports = router;

@@ -5,7 +5,7 @@ const async = require('async');
 const db = require('../module/pool.js');
 
 
-router.post('/:id', async(req, res, next) => {
+router.post('/', async(req, res, next) => {
     const ID = jwt.verify(req.headers.authorization);
 
     if(ID != -1){

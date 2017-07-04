@@ -6,11 +6,12 @@ const db = require('../module/pool.js');
 
 router.post('/', async(req, res) => {
     const ID = jwt.verify(req.headers.authorization);
-    const keyword = req.body.keyword;
-    const search = 'select p.*, s.username from Profiles p join Signup s on p.ID = s.ID where username = ?';
+    const keycard_name = req.body.keycard_name;
+    const list = 'select * from Keycards order by like_counts desc LIMIT 10';
+    console.log(keycard_name);
     //토큰 검증이 성공할 경우
     if(ID != -1) {
-        let result = await db.execute(search, keyword);
+        let result = await db.FindAll(list);
         res.status(200).send({
             result
         });

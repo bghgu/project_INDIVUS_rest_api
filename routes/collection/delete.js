@@ -4,9 +4,9 @@ const async = require('async');
 const jwt = require('../module/jwt.js');
 const db = require('../module/pool.js');
 
-router.delete('/:collection_id', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
     const ID = jwt.verify(req.headers.authorization);
-    const collectionId = req.params.collection_id;
+    const collectionId = req.body.collection_id;
 
     if(ID != -1){
       let readCollection = 'select * from MyCollectionLists where collection_id = ? and ID = ?';

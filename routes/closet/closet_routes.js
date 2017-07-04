@@ -2,12 +2,12 @@
 const express = require('express');
 const router = express.Router();
 
-//워크룸 조회
+//클로젯 조회
 const view = require('./view');
 router.use('/view', view);
 
-//컬렉션 삭제
-//const del = require('./delete');
-//router.use('/delete', del);
+//클로젯에 카테고리 추가
+const add = require('./add');
+router.use('/add', add);
 
 module.exports = router;

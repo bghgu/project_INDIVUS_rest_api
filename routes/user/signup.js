@@ -8,7 +8,6 @@ const hash = require('../module/hash.js');
 router.post('/check', async(req, res, next) => {
     const email = req.body.email;
     const username = req.body.username;
-    console.log(req.body);
     const checkEmail = 'select email from Signup where email = ?';
     const checkUsername = 'select username from Signup where username = ?';
 
@@ -58,13 +57,17 @@ router.post('/', async(req, res, next) => {
     };
 
     let inserted = await db.execute(insertNewUser, newUser);
-    let profilesId = await db.execute(insertIdToProfiles, inserted.insertId);
-
-    res.status(201).send({
-        message: "success",
-        id: inserted.insertId
-    });
-
+    if(inserted == undefined) {
+        res.status(405).send({
+            message: 'please check email or username'
+        });
+    }else {
+        await db.execute(insertIdToProfiles, inserted.insertId);
+        res.status(201).send({
+            message: "success",
+            id: inserted.insertId
+        });
+    }
 });
 
 module.exports = router;

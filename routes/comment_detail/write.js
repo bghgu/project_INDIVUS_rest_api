@@ -4,9 +4,9 @@ const async = require('async');
 const jwt = require('../module/jwt.js');
 const db = require('../module/pool.js');
 
-router.post('/:comment_id', async(req, res, next) => {
+router.post('/', async(req, res, next) => {
     const ID = jwt.verify(req.headers.authorization);
-    const commentId = req.params.comment_id;
+    const commentId = req.body.comment_id;
 
     if(ID != -1){
       let writeCommentDetail = 'insert into CommentDetails set ?';
@@ -25,6 +25,8 @@ router.post('/:comment_id', async(req, res, next) => {
             message : "access denied"
         });
     }
+
+
 });
 
 module.exports = router;

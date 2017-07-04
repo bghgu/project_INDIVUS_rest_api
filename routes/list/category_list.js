@@ -4,13 +4,12 @@ const async = require('async');
 const jwt = require('../module/jwt.js');
 const db = require('../module/pool.js');
 
-router.post('/', async(req, res) => {
+router.get('/', async(req, res) => {
     const ID = jwt.verify(req.headers.authorization);
-    const keyword = req.body.keyword;
-    const search = 'select p.*, s.username from Profiles p join Signup s on p.ID = s.ID where username = ?';
+    const list = 'select * from Categorys order by category_like desc';
     //토큰 검증이 성공할 경우
     if(ID != -1) {
-        let result = await db.execute(search, keyword);
+        let result = await db.FindAll(list);
         res.status(200).send({
             result
         });

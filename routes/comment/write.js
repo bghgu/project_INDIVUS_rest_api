@@ -4,9 +4,9 @@ const async = require('async');
 const jwt = require('../module/jwt.js');
 const db = require('../module/pool.js');
 
-router.post('/:post_id', async(req, res, next) => {
+router.post('/', async(req, res, next) => {
     const ID = jwt.verify(req.headers.authorization);
-    const postId = req.params.post_id;
+    const postId = req.body.post_id;
 
     if(ID != -1){
       let writeComment = 'insert into Comments set ?';
