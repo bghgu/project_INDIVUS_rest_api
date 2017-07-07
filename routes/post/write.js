@@ -30,6 +30,7 @@ router.post('/', multiUpload, async(req, res, next) => {
     const series_name = req.body.title;
     const keycard = req.body.keycard;
     const each_content_type = req.body.each_content_type;
+    let category_id = req.body.category_id;
     let write = 'insert into Posts set ?';
     let insertContents = 'insert into Contents set ?';
     let insertSeries = 'update Series set post_id = ? where ID_creator = ? and series_name = ?';
@@ -40,18 +41,32 @@ router.post('/', multiUpload, async(req, res, next) => {
     let result, check;
     let text = 0;
     let file = 0;
-    console.log(keycard);
+    console.log(req.body);
+    console.log(req.files);
     //토큰 검증이 성공할 경우
     if (ID != -1) {
+        if(category_id == "소설") {
+            category_id = 1;
+        }else if(category_id == "에세이") {
+            category_id = 2;
+        }else if(category_id == "매거진") {
+            category_id = 3;
+        }else if(category_id == "일러스트") {
+            category_id = 4;
+        }else if(category_id == "사진") {
+            category_id = 5;
+        }else if(category_id == "디자인") {
+            category_id = 6;
+        }
         let data = {
             ID_creator: ID,
-            title: series_name,
-            sub_title: req.body.sub_title,
-            explain: req.body.explain,
-            comment: req.body.comment,
+            title: series_name ? series_name : "",
+            sub_title: req.body.sub_title ? req.body.sub_title : "",
+            explain: req.body.explain ? req.body.explain : "",
+            comment: req.body.comment ? req.body.comment : "",
             card_cover: req.files.card_cover ? req.files.card_cover[0].location : null,
-            category_id : req.body.category_id,
-            content_type : req.body.content_type
+            category_id : req.body.category_id ? req.body.category_id : 1,
+            content_type : req.body.content_type ? req.body.content_type : 0
         };
         //post_id 받기
         result = await db.execute(write, data);
@@ -68,21 +83,23 @@ router.post('/', multiUpload, async(req, res, next) => {
                 result = await db.execute(insertContents, contents);
                 text++;
             }
-            //
-            else {
+            //컨텐츠가 파일일 경우
+            else if(each_content_type[i] == 1){
                 let contents = {
                     post_id : post_id,
-                    contents : req.files.contents[file].location,
+                    contents : req.files.contents[file].location ? req.files.contents[file].location : null,
                     type : "image"
                 };
+                console.log(contents);
                 result = await db.execute(insertContents, contents);
                 file++;
             }
         }
-        //
+        console.log(1);
         for(i = 0; i < keycard.length; i++) {
             result = await db.execute3(updateKeycard, post_id, keycard[i]);
         }
+
         //단편일 경우
         if(content_type == 0) {
             let data = {
@@ -99,7 +116,7 @@ router.post('/', multiUpload, async(req, res, next) => {
             }
         }
         if(result != undefined) {
-            res.status(200).send({
+            res.status(201).send({
                 message: "create success",
             });
         }else {

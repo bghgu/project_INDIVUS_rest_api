@@ -14,4 +14,8 @@ router.use('/keycard-list', keycard_list);
 const keycard_add = require('./keycard_add');
 router.use('/keycard-add', keycard_add);
 
+//카테고리 & 키카드 리스트 조회
+const all_list = require('./all_list');
+router.use('/all-list', all_list);
+
 module.exports = router;

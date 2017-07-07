@@ -10,4 +10,8 @@ router.use('/view', view);
 const del = require('./delete');
 router.use('/delete', del);
 
+//컬렉션 상세 삭제
+const add = require('./add');
+router.use('/add', add);
+
 module.exports = router;

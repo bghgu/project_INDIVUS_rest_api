@@ -26,7 +26,6 @@ router.post('/', async(req, res, next) => {
                 post_id : post_id
             };
             result = await db.execute(insertDefault, data);
-            console.log(result);
         }
         //시리즈일 경우
         else {
@@ -36,8 +35,6 @@ router.post('/', async(req, res, next) => {
                 series_name : series_name
             };
             result = await db.execute4(insertSeries, post_id, ID, series_name);
-
-            //if(result.message);
         }
         if(result != undefined) {
             res.status(200).send({

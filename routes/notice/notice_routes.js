@@ -2,8 +2,8 @@
 const express = require('express');
 const router = express.Router();
 
-//포스트 좋아요
-const like = require('./like');
-router.use('/', like);
+//notice
+const notice = require('./notice');
+router.use('/', notice);
 
 module.exports = router;
