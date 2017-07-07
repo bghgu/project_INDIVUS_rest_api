@@ -4,15 +4,20 @@ const async = require('async');
 const jwt = require('../../module/jwt.js');
 const db = require('../../module/pool.js');
 
-router.get('/:id', async(req, res, next) => {
-    //const ID = jwt.verify(req.headers.authorization);
-    const ID = req.params.id;
-    const followerList = 'select * from Follower where ID = ?';
-    let result = await db.execute(followerList, ID);
-    console.log(result);
-    res.status(200).send({
-        result
-    });
+router.get('/', async(req, res, next) => {
+    const ID = jwt.verify(req.headers.authorization);
+    const followerList = 'select distinct f.*, p.jobs, p.profile_photo, s.username from Follower f join Profiles p on f.follower_id=p.ID join Signup s on s.ID=p.ID where f.ID = ?';
+    if (ID != -1) {
+        let result = await db.execute(followerList, ID);
+        res.status(200).send({
+            result
+        });
+    } else {
+        res.status(401).send({
+            message: "access denied"
+        });
+    }
+
 });
 
 module.exports = router;

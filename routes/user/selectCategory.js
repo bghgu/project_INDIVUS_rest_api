@@ -22,6 +22,7 @@ router.post('/', async(req, res, next) => {
         };
         result = await db.execute(select, data);
     }
+    console.log(result);
     if (result != undefined) {
         res.status(201).send({message: 'Signup success'});
     } else {

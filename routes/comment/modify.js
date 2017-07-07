@@ -5,9 +5,9 @@ const async = require('async');
 const jwt = require('../module/jwt.js');
 const db = require('../module/pool.js');
 
-router.put('/:comment_id', async(req, res, next) => {
+router.post('/', async(req, res, next) => {
   const ID = jwt.verify(req.headers.authorization);
-  const commentId = req.params.comment_id;
+  const commentId = req.body.comment_id;
 
   if(ID != -1){
     let readComment = 'select * from Comments where comment_id = ? and ID = ?';

@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 //프로필 조회
 const view = require('./view');
-router.use('/', view);
+router.use('/view', view);
 //프로필 삭제
 const drop = require('./drop');
 router.use('/drop', drop);

@@ -4,13 +4,21 @@ const async = require('async');
 const jwt = require('../module/jwt.js');
 const db = require('../module/pool.js');
 
-router.get('/:keyword', async(req, res) => {
+router.post('/', async(req, res) => {
     const ID = jwt.verify(req.headers.authorization);
-    const keyword = req.params.keyword;
-    const search = 'select p.*, s.username from Profiles p join Signup s on p.ID = s.ID where username = ?';
+    const keyword = req.body.keyword;
+    console.log(keyword);
+    const search = "select p.*, s.username from Profiles p join Signup s on p.ID = s.ID where s.username Like '%" + keyword + "%'";
+    const follow = 'select count(*) as count from Follower where ID = ?';
     //토큰 검증이 성공할 경우
     if(ID != -1) {
-        let result = await db.execute(search, keyword);
+        let result = await db.FindAll(search);
+        console.log(result);
+        for(i = 0 ; i < result.length; i++) {
+            let follow_counts = await db.execute(follow, result[i].ID);
+            console.log(follow_counts);
+            result[i].follower_counts = follow_counts[0].count;
+        }
         res.status(200).send({
             result
         });

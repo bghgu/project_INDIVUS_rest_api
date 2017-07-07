@@ -4,6 +4,6 @@ const router = express.Router();
 
 //포스트 좋아요
 const like = require('./like');
-router.use('/like', like);
+router.use('/', like);
 
 module.exports = router;
