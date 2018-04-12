@@ -69,7 +69,3 @@ API : https://github.com/bghgu/project_INDIVUS_rest_api/wiki
 ## 감사 인사
 
 * SOPT 20기 서버파트장 '김다은'
-
----
-
-
