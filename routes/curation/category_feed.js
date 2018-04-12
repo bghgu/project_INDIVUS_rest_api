@@ -23,6 +23,7 @@ router.get('/', async(req, res) => {
             array.comment_counts = count[0].count;
             result.push(array);
         }
+        console.log(result);
         if(result != undefined) {
             res.status(200).send({
                 result

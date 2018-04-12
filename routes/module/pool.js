@@ -10,7 +10,7 @@ module.exports = {
         const query = args[0];
         let result;
         try {
-            var connection = await pool.getConnection();
+            let connection = await pool.getConnection();
             result = await connection.query(query) || null;
         }
         catch(err) {
