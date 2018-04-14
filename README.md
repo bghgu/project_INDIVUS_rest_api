@@ -1,6 +1,6 @@
 # project_INDIVUS
 
-
+![logo.png](https://github.com/bghgu/project_INDIVUS_rest_api/blob/master/image/logo.png)
 
 2017 SOPT 20기 컨텐츠 큐레이션 SNS 서비스 'INDIVUS'
 
@@ -12,7 +12,9 @@
 
 API : https://github.com/bghgu/project_INDIVUS_rest_api/wiki
 
-ERD
+![erd.jpg](https://github.com/bghgu/project_INDIVUS_rest_api/blob/master/image/erd.jpg)
+
+ERD 다이어그램
 
 ## 시작하기
 
@@ -30,7 +32,7 @@ ERD
 ```
   npm install
 ```
-###실행하기
+### 실행하기
 
 ```
   npm start
