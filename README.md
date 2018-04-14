@@ -124,3 +124,5 @@ ERD 다이어그램
 
 - 2017년 SOPT 20기 서버 파트 MVP - **배다슬** - *INDIVUS server 개발* - [bghgu](https://github.com/bghgu)
 - 2017년 SOPT 20기 안드로이드 파트 MVP - **서동욱** - *INDIVUS android 앱 개발* - [seowok](https://github.com/seowok)
+
+------
