@@ -14,7 +14,7 @@ API : https://github.com/bghgu/project_INDIVUS_rest_api/wiki
 
 ![erd.jpg](https://github.com/bghgu/project_INDIVUS_rest_api/blob/master/image/erd.jpg)
 
-ERD 다이어그램
+ER 다이어그램
 
 ## 시작하기
 
